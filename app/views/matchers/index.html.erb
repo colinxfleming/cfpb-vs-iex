@@ -5,10 +5,7 @@
 
 <div class="row">
   <div class="col-md-6" id="cfpb_form">
-    <%= bootstrap_form_tag url: cfpb_lookup_path do |f| %>
-      <%= f.text_field :company_name, help: 'Company name. e.g. Bank of America, Toyota' %>
-      <%= f.submit 'Look up company in CFPB complaint', class: 'btn btn-primary' %>
-    <% end %>
+    <%= render 'cfpb_lookup_form' %>
   </div>
 
   <div class="col-md-6" id='exact_form'></div>

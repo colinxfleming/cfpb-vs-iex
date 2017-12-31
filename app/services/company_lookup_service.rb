@@ -13,9 +13,9 @@ class CompanyLookupService
 
   # Frontend access point. Look up general thing and confirm existence
   def lookup(company)
-    @cfpb_name = fuzzy_cfpb_lookup(company).first
+    cfpb_name = fuzzy_cfpb_lookup(company).first || {}
+    iex_name = match_cfpb_to_iex(cfpb_name) || {}
 
-    iex_name = match_cfpb_to_iex cfpb_name
     { cfpb: cfpb_name['name'], iex: iex_name['name'] }
   end
 
@@ -39,6 +39,7 @@ class CompanyLookupService
   end
 
   def match_cfpb_to_iex(cfpb_name)
+    return if cfpb_name.blank?
     core_name = clean cfpb_name['name']
 
     exact_match = @iex_data.find { |x| clean(x['name']) == core_name }

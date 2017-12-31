@@ -1,0 +1,4 @@
+<%= bootstrap_form_tag url: cfpb_lookup_path, remote: true do |f| %>
+  <%= f.text_field :company_name, help: 'Company name. e.g. Bank of America, Toyota' %>
+  <%= f.submit 'Look up company in CFPB complaint', class: 'btn btn-primary' %>
+<% end %>
