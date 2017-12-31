@@ -22,8 +22,8 @@ Programming time (including the design doc below) begins at 8pm.
 * Write a service connector for an IEX 
 * Figure out how to translate IEX companies into CFPB complaint companies
 * Write a frontend for Goal A
-* Dockerize so it's runnable
-* In remaining time: Write a frontend for goal B
+* Dockerize so it's runnable (didn't make it)
+* In remaining time: Write a frontend for goal B (didn't make it)
 
 ## Setup instructions
 
