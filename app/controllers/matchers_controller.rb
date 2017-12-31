@@ -31,7 +31,6 @@ class MatchersController < ApplicationController
   end
 
   def process_exact_lookup_response(api_responses)
-    puts api_responses
     if api_responses[:iex]['companyName'].blank? || api_responses[:cfpb_random_complaint].blank?
       api_responses.merge error: 'ERROR'
     else
