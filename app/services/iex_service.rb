@@ -22,4 +22,15 @@ class IEXService
     symbols_url = "#{BASE_URL}/#{COMPANY_SYMBOLS_ENDPOINT}"
     HTTParty.get(symbols_url).parsed_response
   end
+
+  def self.company_list
+    # TODO collapse company list and company symbols
+    all_symbols = company_symbols
+    all_symbols.map do |company|
+      {
+        symbol: company['symbol'],
+        name: company['name']
+      }
+    end
+  end
 end
