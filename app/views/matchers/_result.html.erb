@@ -1,0 +1,15 @@
+<% if api_responses[:error] %>
+  Sorry, something screwed up!
+<% else %>
+  <div class="col-md-6">
+    <h3>Found <%= api_responses[:cfpb_complaint_count] %> CFPB complaints for <%= api_responses[:cfpb_random_complaint]['company'].titleize %></h3>
+
+    <p><%= api_responses[:cfpb_random_complaint]['complaint_what_happened'] %></p>
+  </div>
+
+  <div class="col-md-6">
+    <h3><%= api_responses[:iex]['companyName'] %> stock values<h3>
+
+    <p><%= number_to_currency api_responses[:iex]['latest_price'] %> (high of <%= number_to_currency api_responses[:iex]['high'] %>)</p>
+  </div>
+<% end %>

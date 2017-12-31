@@ -3,17 +3,16 @@ class MatchersController < ApplicationController
 
   def cfpb_lookup
     api_response = CompanyLookupService.new.lookup params[:company_name]
-    puts params
-    puts response
     @company_match = process_cfpb_lookup_response api_response
+
     respond_to { |format| format.js }
   end
 
   def exact_lookup
-    @api_responses = CompanyLookupService.new.pull_company params[:cfpb_name],
-                                                           params[:iex_name]
-    
-    puts @api_responses
+    api_responses = CompanyLookupService.new.pull_company params[:cfpb_name],
+                                                          params[:iex_name]
+    @api_responses = process_exact_lookup_response api_responses
+
     respond_to { |format| format.js }
   end
 
@@ -28,6 +27,15 @@ class MatchersController < ApplicationController
                                 ' that company.'
     else
       api_response
+    end
+  end
+
+  def process_exact_lookup_response(api_responses)
+    puts api_responses
+    if api_responses[:iex]['companyName'].blank? || api_responses[:cfpb_random_complaint].blank?
+      api_responses.merge error: 'ERROR'
+    else
+      api_responses
     end
   end
 end
