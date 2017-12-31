@@ -5,13 +5,14 @@ class IEXService
   COMPANY_SYMBOLS_ENDPOINT = 'ref-data/symbols'.freeze
 
   def self.search_stocks(company_name)
-    search_url = "#{BASE_URL}/#{stocks(company_name)}"
+    search_url = "#{BASE_URL}/#{stocks_endpoint(company_name)}"
 
     stock = HTTParty.get search_url
     stock.parsed_response
   end
 
-  def self.stocks(company_name)
+  def self.stocks_endpoint(company_name)
+    # Figure out the symbol from the name, then search by the symbol
     company_symbol = company_symbols.find { |company| company['name'] == company_name }['symbol']
     "stock/#{company_symbol.downcase}/quote"
   end
