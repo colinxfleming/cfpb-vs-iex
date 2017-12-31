@@ -1,7 +1,7 @@
 class MatchersController < ApplicationController
   def index; end
 
-  def fuzzy_lookup
+  def cfpb_lookup
 
   end
 

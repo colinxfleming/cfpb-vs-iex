@@ -1,2 +1,17 @@
-<h1>Matchers#index</h1>
-<p>Find me in app/views/matchers/index.html.erb</p>
+<div class="jumbotron" id="header">
+  <h1>CFPB Complaint vs IEX Stock Price</h1>
+  <p>Compare a company's Consumer Financial Protection Bureau complaints vs current stock prices, according to IEX.</p>
+</div>
+
+<div class="row">
+  <div class="col-md-6" id="cfpb_form">
+    <%= bootstrap_form_tag url: cfpb_lookup_path do |f| %>
+      <%= f.text_field :company_name, help: 'Company name. e.g. Bank of America, Toyota' %>
+      <%= f.submit 'Look up company in CFPB complaint', class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+
+  <div class="col-md-6" id='exact_form'></div>
+</div>
+
+<div id="results"></div>
