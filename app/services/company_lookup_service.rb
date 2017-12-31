@@ -48,7 +48,6 @@ class CompanyLookupService
     else
       # Sloppy rough matcher, but works for a proof of concept.
       # Should do some word bucketing here instead.
-      # Note an
       iex_data.find { |x| clean(x['name'])[0] == core_name[0] }
     end
   end
