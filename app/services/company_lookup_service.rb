@@ -16,10 +16,17 @@ class CompanyLookupService
   end
 
   # Frontend access point. Pull down and return both
-  # def self.pull_company(cfpb_company, iex_company)
-  #   # Start with CFPB because it is way more brittle
-  #   complaint = CFPBService.search_complaints cfpb_company
-  # end
+  def self.pull_company(cfpb, iex)
+    # Start with CFPB because it is way more brittle
+    complaint = CFPBService.search_complaints cfpb
+    stock = IEXService.search_stocks iex
+
+    {
+      cfpb_complaint_count: complaint[:complaint_count],
+      cfpb_random_complaint: complaint[:comment],
+      iex: stock
+    }
+  end
 
   def self.fuzzy_cfpb_lookup(company)
     load_cfpb_companies.select { |opt| /#{company}/i =~ opt['name'] }

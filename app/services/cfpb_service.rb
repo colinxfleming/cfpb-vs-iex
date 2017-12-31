@@ -15,14 +15,9 @@ class CFPBService
     complaints = HTTParty.get search_url
 
     {
-      complaints: complaints.parsed_response,
-      comment: find_comment(complaints)
+      complaint_count: complaints.parsed_response.count,
+      comment: complaints.parsed_response.sample
     }
-  end
-
-  def self.find_comment(complaint_json)
-    complaint_json.select { |complaint| complaint['complaint_what_happened'].present? }
-                  .sample['complaint_what_happened']
   end
 
   def self.company_list
