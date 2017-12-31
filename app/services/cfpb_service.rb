@@ -28,8 +28,7 @@ class CFPBService
   def self.company_list
     HTTParty.get(DATASET_URL)
             .parsed_response
-            .map { |x| x['company'] }
+            .map { |x| { name: x['company'] } }
             .uniq
-            .sort
   end
 end
