@@ -24,4 +24,12 @@ class CFPBService
     complaint_json.select { |complaint| complaint['complaint_what_happened'].present? }
                   .sample['complaint_what_happened']
   end
+
+  def self.company_list
+    HTTParty.get(DATASET_URL)
+            .parsed_response
+            .map { |x| x['company'] }
+            .uniq
+            .sort
+  end
 end
