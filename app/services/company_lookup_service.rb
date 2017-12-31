@@ -42,14 +42,14 @@ class CompanyLookupService
     core_name = clean cfpb_name['name']
 
     exact_match = @iex_data.find { |x| clean(x['name']) == core_name }
+    return exact_match if exact_match
 
-    if exact_match
-      exact_match
-    else
-      # Sloppy rough matcher, but works for a proof of concept.
-      # Should do some word bucketing here instead.
-      iex_data.find { |x| clean(x['name'])[0] == core_name[0] }
-    end
+    # Sloppy rough matcher, but works for a proof of concept.
+    # Should do some word bucketing here instead.
+    fuzzy_match = iex_data.find { |x| clean(x['name'])[0] == core_name[0] }
+    return fuzzy_match if fuzzy_match
+
+    { error: 'NO RESULTS FOUND' }
   end
 
   def clean(company_name)
