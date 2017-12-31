@@ -1,0 +1,20 @@
+<% if company_match[:error] %>
+  <div class="row errors">
+    <p class="text-danger">
+      <%= company_match[:error] %> Sorry! Give it another shot?    
+    </p>
+  </div>
+<% else %>
+  <div class="row">
+    <p class='text-success'>
+      Looks like we have a match! Does that look okay to you?
+    </p>
+  </div>
+  <div class="row">
+    <%= bootstrap_form_tag url: exact_lookup_path, remote: true do |f| %>
+      <%= f.text_field :cfpb_name, value: company_match[:cfpb], label: 'CFPB company name' %>
+      <%= f.text_field :iex_name, value: company_match[:iex], label: 'IEX company name' %>
+      <%= f.submit 'Yep, look it up', class: 'btn btn-success' %>
+    <% end %>    
+  </div>
+<% end %>
