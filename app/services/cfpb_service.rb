@@ -8,7 +8,8 @@ class CFPBService
   def self.search_complaints(company_name)
     # Socrata has a SQL-ish API. Nice of 'em
     filter = "$where=company like '%#{company_name}%'"
-    complaints = HTTParty.get("#{DATASET_URL}?#{filter}")
+    search_url = URI.escape("#{DATASET_URL}?#{filter}")
+    complaints = HTTParty.get search_url
     complaints
   end
 end
